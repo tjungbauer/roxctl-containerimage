@@ -18,4 +18,3 @@ RUN curl -O https://mirror.openshift.com/pub/rhacs/assets/${VERSION}/bin/Linux/r
 
 RUN useradd -ms /bin/bash stackrox
 USER stackrox
-
