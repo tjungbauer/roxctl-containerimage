@@ -9,8 +9,8 @@ RUN yum --disableplugin=subscription-manager -y update \
   && yum --disableplugin=subscription-manager clean all
 
 # The ACS Version
-#ARG VERSION=3.67.1
-ARG VERSION=latest
+ARG VERSION=3.70.1
+#ARG VERSION=latest
 
 RUN curl -O https://mirror.openshift.com/pub/rhacs/assets/${VERSION}/bin/Linux/roxctl \
   && chmod +x roxctl \
