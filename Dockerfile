@@ -1,8 +1,8 @@
-FROM registry.access.redhat.com/ubi9/ubi:9.0.0-1468.1655190709
+FROM --platform=linux/amd64 registry.access.redhat.com/ubi9/ubi:latest
 
-LABEL com.redhat.component="ubi8-container" \
-      name="ubi8" \
-      version="8.4"
+LABEL com.redhat.component="ubi9-container" \
+      name="ubi9" \
+      version="latest"
 
 RUN yum --disableplugin=subscription-manager -y update \
 #  && yum --disableplugin=subscription-manager -y install curl \
