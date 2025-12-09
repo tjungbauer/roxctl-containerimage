@@ -28,7 +28,7 @@ on:
 
 env:
   REGISTRY: quay.io
-  IMAGE_NAME: tjungbau/roxctl
+  IMAGE_NAME: tjungbau/roxctl-bin-container
 
 jobs:
   lint:
