@@ -11,14 +11,13 @@ LABEL com.redhat.component="roxctl-container" \
       maintainer="tjungbau"
 
 RUN microdnf update -y \
-    && microdnf install -y curl shadow-utils \
+    && microdnf install -y shadow-utils \
+    && microdnf clean all \
+    && rm -rf /var/cache/yum \
     && curl -fsSL -o /usr/local/bin/roxctl \
        "https://mirror.openshift.com/pub/rhacs/assets/${VERSION}/bin/Linux/roxctl" \
     && chmod +x /usr/local/bin/roxctl \
-    && useradd -ms /bin/sh stackrox \
-    && microdnf remove -y curl \
-    && microdnf clean all \
-    && rm -rf /var/cache/yum
+    && useradd -ms /bin/sh stackrox
 
 WORKDIR /home/stackrox
 
