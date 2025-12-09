@@ -7,7 +7,14 @@ A minimal container image packaging the **roxctl** CLI for Red Hat Advanced Clus
 ## Pull
 
 ```bash
+# Latest version
 podman pull quay.io/tjungbau/roxctl-bin-container:latest
+
+# By image version
+podman pull quay.io/tjungbau/roxctl-bin-container:1.0.0
+
+# By roxctl version
+podman pull quay.io/tjungbau/roxctl-bin-container:roxctl-v4.9.1
 ```
 
 ## Usage

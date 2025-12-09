@@ -145,7 +145,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=raw,value=${{ needs.version.outputs.version }}
-            type=raw,value=${{ needs.version.outputs.roxctl_version }}
+            type=raw,value=roxctl-v${{ needs.version.outputs.roxctl_version }}
             type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push
@@ -269,13 +269,13 @@ jobs:
             - **Image**: `${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.version.outputs.version }}`
             - **roxctl Version**: `${{ needs.version.outputs.roxctl_version }}`
             - **Platform**: linux/amd64
-            - **Base**: UBI9 Minimal
+            - **Base**: UBI10 Minimal
             
             ### Pull Image
             ```bash
             podman pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.version.outputs.version }}
             # or by roxctl version
-            podman pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.version.outputs.roxctl_version }}
+            podman pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:roxctl-v${{ needs.version.outputs.roxctl_version }}
             ```
             
             ### Usage
