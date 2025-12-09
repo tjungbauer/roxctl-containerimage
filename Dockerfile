@@ -1,20 +1,27 @@
-FROM --platform=linux/amd64 registry.access.redhat.com/ubi9/ubi:latest
+FROM --platform=linux/amd64 registry.access.redhat.com/ubi10/ubi-minimal:latest
 
-LABEL com.redhat.component="ubi9-container" \
-      name="ubi9" \
-      version="latest"
+# The ACS/RHACS Version to download
+ARG VERSION=4.5.4
 
-RUN yum --disableplugin=subscription-manager -y update \
-#  && yum --disableplugin=subscription-manager -y install curl \
-  && yum --disableplugin=subscription-manager clean all
+LABEL com.redhat.component="roxctl-container" \
+      name="roxctl" \
+      version="${VERSION}" \
+      summary="Red Hat Advanced Cluster Security roxctl CLI" \
+      description="Container image providing the roxctl CLI tool for RHACS/Stackrox" \
+      maintainer="tjungbau"
 
-# The ACS Version
-ARG VERSION=3.70.1
-#ARG VERSION=latest
+RUN microdnf update -y \
+    && microdnf install -y shadow-utils \
+    && microdnf clean all \
+    && rm -rf /var/cache/yum \
+    && curl -fsSL -o /usr/local/bin/roxctl \
+       "https://mirror.openshift.com/pub/rhacs/assets/${VERSION}/bin/Linux/roxctl" \
+    && chmod +x /usr/local/bin/roxctl \
+    && useradd -ms /bin/sh stackrox
 
-RUN curl -O https://mirror.openshift.com/pub/rhacs/assets/${VERSION}/bin/Linux/roxctl \
-  && chmod +x roxctl \
-  && mv roxctl /usr/local/bin/
+WORKDIR /home/stackrox
 
-RUN useradd -ms /bin/bash stackrox
 USER stackrox
+
+ENTRYPOINT ["roxctl"]
+CMD ["--help"]
