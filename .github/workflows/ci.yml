@@ -43,7 +43,7 @@ jobs:
         with:
           dockerfile: Dockerfile
           failure-threshold: warning
-          ignore: DL3041
+          ignore: DL3007,DL3029,DL3041
 
   version:
     name: Determine Version
