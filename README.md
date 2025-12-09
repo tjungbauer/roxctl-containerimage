@@ -47,4 +47,3 @@ podman build --build-arg VERSION=4.5.4 -t roxctl:4.5.4 .
 | Platform | linux/amd64 |
 | User | stackrox (non-root) |
 | Entrypoint | `roxctl` |
-
